@@ -1,6 +1,70 @@
 # GameSpace Lite
 
-Panel melayang + auto clicker + monitor suhu/RAM + SpeedClock (timer berskala untuk app sendiri).
+Panel name: Build GameSpaceLite APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: android-actions/setup-android@v4
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Build APK
+        run: gradle assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: GameSpaceLite-APK
+          path: app/build/outputs/apk/debug/*.apkname: Build GameSpaceLite APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: android-actions/setup-android@v4
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Build APK
+        run: gradle assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: GameSpaceLite-APK
+          path: app/build/outputs/apk/debug/*.apk + auto clicker + monitor suhu/RAM + SpeedClock (timer berskala untuk app sendiri).
 
 ## Build tanpa Android Studio (cukup dari HP)
 1. Buat repo GitHub, unggah semua isi folder ini (termasuk `.github`).
